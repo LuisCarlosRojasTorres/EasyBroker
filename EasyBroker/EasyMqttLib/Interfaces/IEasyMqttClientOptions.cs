@@ -6,10 +6,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-internal interface IEasyMqttBrokertOptions
+public interface IEasyMqttClientOptions
 {
-    public bool IsTLS { get; set; }
-    public string TLSCertificate { get; set; }
+    public string BrokerIpAddress { get; set; }
     public List<int> Ports { get; set; }
     public int TimeoutInMs { get; set; }
+    public List<string> Topics { get; set; }
 }
