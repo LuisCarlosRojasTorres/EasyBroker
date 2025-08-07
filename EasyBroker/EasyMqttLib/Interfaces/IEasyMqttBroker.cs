@@ -26,4 +26,11 @@ public interface IEasyMqttBroker
 
     public Task UnsubscriptionPostProcessingAsync(InterceptingUnsubscriptionEventArgs e);    
 
+    /// <summary>
+    /// Action where topic is the argument.
+    /// </summary>
+    public Action<string>? PublishPostProcessCallback { get; set; }
+    public Action<string>? SubscriptionPostProcessCallback { get; set; }
+    public Action<string>? UnsubscriptionPostProcessCallback { get; set; }
+
 }
