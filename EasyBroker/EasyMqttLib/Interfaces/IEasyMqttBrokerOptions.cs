@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-internal interface IEasyMqttBrokertOptions
+public interface IEasyMqttBrokerOptions
 {
     public bool IsTLS { get; set; }
     public string TLSCertificate { get; set; }
