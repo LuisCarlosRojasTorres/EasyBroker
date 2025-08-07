@@ -16,6 +16,10 @@ public class EasyMqttBroker : IEasyMqttBroker
     private MqttServerOptions? mqttServerOptions;
     private MqttServer? mqttServer;
 
+    public Action<string>? PublishPostProcessCallback { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+    public Action<string>? SubscriptionPostProcessCallback { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+    public Action<string>? UnsubscriptionPostProcessCallback { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
     public EasyMqttBroker() 
     {
         this.mqttFactory = new MqttFactory();

@@ -3,12 +3,7 @@
 using EasyMqttLib.Interfaces;
 using MQTTnet;
 using MQTTnet.Server;
-using Serilog;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
 using System.Threading.Tasks;
 
 public class EasyMqttBrokerDebug : IEasyMqttBroker
@@ -16,7 +11,10 @@ public class EasyMqttBrokerDebug : IEasyMqttBroker
     private MqttFactory? mqttFactory;
     private MqttServerOptions? mqttServerOptions;
     private MqttServer? mqttServer;
-    
+
+    public Action<string>? PublishPostProcessCallback { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+    public Action<string>? SubscriptionPostProcessCallback { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+    public Action<string>? UnsubscriptionPostProcessCallback { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
     public EasyMqttBrokerDebug() 
     {

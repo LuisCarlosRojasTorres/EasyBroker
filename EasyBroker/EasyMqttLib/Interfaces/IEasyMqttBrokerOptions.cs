@@ -8,4 +8,6 @@ using System.Threading.Tasks;
 
 internal interface IEasyMqttBrokerOptions
 {
+    public List<int> Ports { get; set; }
+    public int TimeoutInMs { get; set; }
 }
