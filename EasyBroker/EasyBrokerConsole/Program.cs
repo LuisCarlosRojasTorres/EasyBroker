@@ -1,10 +1,13 @@
-﻿namespace EasyBrokerConsole
+﻿namespace EasyBrokerConsole;
+using EasyMqttLib.Model;
+
+internal class Program
 {
-    internal class Program
+    static async Task Main(string[] args)
     {
-        static void Main(string[] args)
-        {
-            Console.WriteLine("Hello, World!");
-        }
+        Console.WriteLine("Hello, World!");
+        EasyMqttBroker broker = new EasyMqttBroker();
+
+        await broker.Start();
     }
 }

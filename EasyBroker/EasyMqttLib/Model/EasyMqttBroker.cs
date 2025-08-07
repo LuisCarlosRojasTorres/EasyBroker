@@ -36,6 +36,7 @@ public class EasyMqttBroker : IEasyMqttBroker
             this.mqttServer.InterceptingUnsubscriptionAsync += this.UnsubscriptionPostProcessingAsync;
             
             await this.mqttServer.StartAsync();
+            Console.WriteLine($"EasyMqttBroker: Started NO TLS broker at port {port}");
 
         }
         catch (Exception ex) 
