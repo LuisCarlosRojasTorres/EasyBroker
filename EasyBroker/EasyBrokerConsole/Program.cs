@@ -1,5 +1,6 @@
 ﻿using EasyMqttLib.Model;
 using EasyMqttLib.Model.Enums;
+using Serilog;
 using System.Text.Json;
 
 namespace EasyBrokerConsole;
@@ -9,15 +10,24 @@ public class Program
     static async Task Main(string[] args)
     {
         EasyMqttBrokerOptions options;
-        EasyMqttBroker broker = new EasyMqttBroker();
-
-        MqttStates state = MqttStates.Initializing;
-        
 
         using (StreamReader file = File.OpenText(Path.Combine("BrokerConfig.json")))
         {
             options = JsonSerializer.Deserialize<EasyMqttBrokerOptions>(file.ReadToEnd())!;
         }
+
+        
+
+        
+        EasyMqttBroker broker = new EasyMqttBroker();
+
+        MqttStates state = MqttStates.Initializing;
+
+        Log.Logger = new LoggerConfiguration()
+            .WriteTo.Console() // Log to console
+            .WriteTo.File(options.LogsPath + "log.txt", rollingInterval: RollingInterval.Day) // Log to file
+            .CreateLogger();
+
 
         CancellationTokenSource cts = new();
 
@@ -26,13 +36,14 @@ public class Program
             switch (state)
             {
                 case MqttStates.Initializing:
-                    Console.WriteLine("Server Initializing");
+                    Log.Information("Server Initializing");
                     state = MqttStates.CreatingBroker;
                     break;
 
                 case MqttStates.CreatingBroker:
-                    await broker.Start(4888);
-                    Console.WriteLine("Server Running");
+                    await broker.Start(options.Ports[0]);
+                    Log.Information("Server Running");
+                    state = MqttStates.Running;
                     break;
                 case MqttStates.Running:                  
                     
@@ -48,3 +59,4 @@ public class Program
         }
     }
 }
+
