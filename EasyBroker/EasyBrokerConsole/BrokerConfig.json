@@ -1,7 +1,7 @@
 {
   "IsTLS": false,
   "TLSCertificate": "AlarmTopic",
-  "LogsPath": "./logsBroker",
+  "LogsPath": "./logsBroker/",
   "Ports": [ 1883, 4888 ],
   "TimeoutInMs": 50
 }
