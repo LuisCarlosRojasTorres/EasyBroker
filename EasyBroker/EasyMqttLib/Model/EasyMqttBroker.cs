@@ -4,17 +4,17 @@ using EasyMqttLib.Interfaces;
 using MQTTnet;
 using MQTTnet.Server;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 public class EasyMqttBroker : IEasyMqttBroker
 {
+    
     private MqttFactory? mqttFactory;
     private MqttServerOptions? mqttServerOptions;
     private MqttServer? mqttServer;
+
+
 
     public Action<string>? PublishPostProcessCallback { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
     public Action<string>? SubscriptionPostProcessCallback { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
@@ -25,6 +25,8 @@ public class EasyMqttBroker : IEasyMqttBroker
         this.mqttFactory = new MqttFactory();
         this.mqttServerOptions =null;
         this.mqttServer = null;
+
+        
     }
 
 
@@ -39,8 +41,7 @@ public class EasyMqttBroker : IEasyMqttBroker
             this.mqttServer.InterceptingSubscriptionAsync += this.SubscriptionPostProcessingAsync;
             this.mqttServer.InterceptingUnsubscriptionAsync += this.UnsubscriptionPostProcessingAsync;
             
-            await this.mqttServer.StartAsync();
-            Console.WriteLine($"EasyMqttBroker: Started NO TLS broker at port {port}");
+            await this.mqttServer.StartAsync();            
 
         }
         catch (Exception ex) 

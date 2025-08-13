@@ -7,4 +7,14 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\EasyMqttLib\EasyMqttLib.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="BrokerConfig.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
