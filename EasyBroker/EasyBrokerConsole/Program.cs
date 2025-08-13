@@ -31,6 +31,9 @@ public class Program
 
         CancellationTokenSource cts = new();
 
+        int portCounter = 0;
+        
+
         while (!cts.Token.IsCancellationRequested)
         {
             switch (state)
@@ -41,9 +44,17 @@ public class Program
                     break;
 
                 case MqttStates.CreatingBroker:
-                    await broker.Start(options.Ports[0]);
-                    Log.Information("Server Running");
-                    state = MqttStates.Running;
+                    try
+                    {
+                        await broker.Start(options.Ports[portCounter]);
+                        Log.Information("Server Running at port: {port}", options.Ports[portCounter]);
+                        state = MqttStates.Running;
+                    }
+                    catch (Exception ex) 
+                    {
+                        Log.Error("Error starting broker at port {port}. More details at: {ex}", options.Ports[portCounter],ex);
+                        portCounter = portCounter++% options.Ports.Count;                        
+                    }
                     break;
                 case MqttStates.Running:                  
                     
